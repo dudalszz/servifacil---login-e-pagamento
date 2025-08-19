@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perfil - ServiFácil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style-perfil.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <button
+      class="hamburger"
+      onclick="document.querySelector('.sidebar').classList.toggle('active')"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="logo">
+          <img src="logo.png" alt="Logo ServiFácil" class="logo-icon" />
+          <span>ServiFácil</span>
+        </div>
+        <nav>
+          <ul>
+            <li class="active">
+              <a href="#"><i class="fas fa-user"></i> Perfil</a>
+            </li>
+            <li>
+              <a href="#"><i class="fas fa-bell"></i> Notificações</a>
+            </li>
+            <li>
+              <a href="#"><i class="fas fa-lock"></i> Privacidade</a>
+            </li>
+            <li>
+              <a href="#"><i class="fas fa-question-circle"></i> Ajuda e Suporte</a>
+            </li>
+          </ul>
+        </nav>
+      </aside>
+
+      <main class="main editar-perfil">
+        <div class="card profile-card">
+          <img src="/img.png" alt="Foto de perfil" />
+          <h2>Andrés Almeida</h2>
+          <div class="status"><i class="fas fa-circle-check"></i> Usuário ativo</div>
+
+          <div class="profile-info">
+            <div class="info-block">
+              <i class="fas fa-user"></i>
+              <input type="text" value="Andrés Almeida" />
+            </div>
+            <div class="info-block">
+              <i class="fas fa-phone"></i>
+              <input type="text" value="(11) 99999-8888" />
+            </div>
+            <div class="info-block">
+              <i class="fas fa-map-marker-alt"></i>
+              <input type="text" value="Rua das Flores, 123, São Paulo - SP" />
+            </div>
+          </div>
+
+          <div class="button-group">
+            <button class="edit-btn" onclick="window.location.href='editar-perfil.html'">
+              <i class="fas fa-edit"></i> Editar Perfil
+            </button>
+            <button class="logout-btn">
+              <i class="fas fa-sign-out-alt"></i> Sair
+            </button>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-top">
+        <div class="footer-logo">ServiFácil</div>
+        <div class="footer-links">
+          <a href="#">Ajuda</a>
+          <a href="#">Termos</a>
+          <a href="#">Privacidade</a>
+          <a href="#">Contato</a>
+        </div>
+      </div>
+      <div class="footer-social">
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+      <div class="footer-copy">© 2023 ServiFácil. Todos os direitos reservados.</div>
+    </footer>
+
+    <script>
+      const logoBtns = document.querySelectorAll(".logo-mobile");
+      const sidebar = document.querySelector(".sidebar");
+
+      logoBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          sidebar.classList.toggle("active");
+        });
+      });
+    </script>
+  </body>
+</html>
