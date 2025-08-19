@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Finalizar Pagamento - ServiFácil</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style-pagamento.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+  <body>
+  <div class="layout">
+    <!-- Botão hamburguer -->
+    <button class="hamburger" onclick="document.querySelector('.sidebar').classList.toggle('active')">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <div class="container">
+        <aside class="sidebar">
+    <div class="logo">
+      <img src="/pagamentos/logo.png" alt="Logo ServiFácil" class="logo-icon">
+      <span>ServiFácil</span>
+    </div>
+    <nav>
+      <ul>
+        <li class="active"><a href="#"><i class="fas fa-user"></i> Perfil</a></li>
+        <li><a href="#"><i class="fas fa-bell"></i> Notificações</a></li>
+        <li><a href="#"><i class="fas fa-lock"></i> Privacidade</a></li>
+        <li><a href="#"><i class="fas fa-question-circle"></i> Ajuda e Suporte</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+
+    <main class="main-content">
+      <h2>Finalizar Pagamento</h2>
+      <div class="payment-wrapper">
+        <section class="payment-details">
+          <h3 class="titulo-pagamento">Dados de Pagamento</h3>
+
+          <div class="section">
+            <h4 class="info-cartao">Informações do Cartão</h4>
+            <label>Número do Cartão</label>
+            <input type="text" placeholder="0000 0000 0000 0000" />
+
+            <div class="row">
+              <div>
+                <label>Validade</label>
+                <input type="text" placeholder="MM/AA" />
+              </div>
+              <div>
+                <label>CVV</label>
+                <input type="text" placeholder="123" />
+              </div>
+            </div>
+
+            <label>Nome no Cartão</label>
+            <input type="text" placeholder="Como está impresso no cartão" />
+          </div>
+
+          <div class="section">
+            <h4>Endereço de Cobrança</h4>
+            <label>Rua, número e bairro</label>
+            <input type="text" placeholder="Av. Brasil, 123 - Centro" />
+            <div class="row">
+              <div>
+                <label>Cidade</label>
+                <input type="text" placeholder="São Paulo" />
+              </div>
+              <div>
+                <label>Estado</label>
+                <select>
+                  <option>Selecione</option>
+                  <option>SP</option>
+                  <option>RJ</option>
+                  <option>MG</option>
+                </select>
+              </div>
+            </div>
+
+            <label>CEP</label>
+            <input type="text" placeholder="00000-000" />
+          </div>
+        </section>
+
+       <aside class="order-summary">
+  <h3>Resumo do Pedido</h3>
+
+  <div class="service">
+  <p class="service-title">
+    <img src="/pagamentos/icone-limpeza.png" alt="Ícone de limpeza" class="icone-limpeza" />
+    Serviço de Limpeza</p>
+    <p class="service-desc">Limpeza completa - 4 horas</p>
+
+    <div class="provider">
+      <img src="/pagamentos/images.jpg" alt="Maria Silva" />
+      <div>
+        <p class="provider-name">Maria Silva</p>
+        <span class="provider-rating">⭐ 4.8 (56 avaliações)</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="totals">
+    <div><span>Subtotal</span><span>R$ 150,00</span></div>
+    <div><span>Taxa de serviço</span><span>R$ 15,00</span></div>
+    <div class="total"><strong>Total</strong><strong>R$ 165,00</strong></div>
+  </div>
+
+  <div class="ssl-note">
+    <i class="fas fa-lock"></i> Seus dados estão protegidos com criptografia SSL
+  </div>
+
+  <button class="btn-confirm">Confirmar Pagamento</button>
+  <p class="terms-note">Ao confirmar, você concorda com nossos <a href="#">Termos de Serviço</a></p>
+</aside>
+
+      </div>
+    </main>
+  </div>
+
+<footer class="footer">
+    <div class="footer-top">
+      <span class="footer-logo">ServiFácil</span>
+      <div class="footer-links">
+        <a href="#">Ajuda</a>
+        <a href="#">Termos</a>
+        <a href="#">Privacidade</a>
+        <a href="#">Contato</a>
+      </div>
+      <div class="footer-social">
+    <a href="#"><i class="fab fa-facebook"></i></a>
+    <a href="#"><i class="fab fa-instagram"></i></a>
+    <a href="#"><i class="fab fa-twitter"></i></a>
+  </div>
+    </div>
+    <p class="footer-copy">© 2023 ServiFácil. Todos os direitos reservados.</p>
+  </footer>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
