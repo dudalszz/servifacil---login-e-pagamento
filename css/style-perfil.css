@@ -407,25 +407,19 @@ body {
 
 @media (max-width: 768px) {
   /* Sidebar no mobile */
-  .sidebar {
+   .sidebar {
     position: fixed;
     top: 0;
-    left: -250px;
+    left: -250px; /* escondida */
     width: 220px;
     height: 100%;
     background: #fff;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease-in-out;
+    transition: left 0.3s ease;
     z-index: 1000;
     padding-top: 60px;
   }
-
   .sidebar.active {
-    transform: translateX(0);
-  }
-
-  .sidebar.closed {
-    transform: translateX(-100%);
+    left: 0; /* aparece */
   }
 
   .hamburger {
