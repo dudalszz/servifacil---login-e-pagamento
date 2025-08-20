@@ -347,8 +347,20 @@ input, select {
   }
 
   .hamburger {
-    display: block;
-  }
+  display: block;
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  left: 15px; /* ou right: 20px se for editar-perfil */
+  z-index: 1001;
+  background: none; /* pode deixar transparente */
+  border: none;
+}
+  .hamburger-logo {
+  width: 30px;  /* ajusta como quiser */
+  height: 30px;
+  object-fit: contain;
+}
 
   /* Footer centralizado */
   .footer-top {

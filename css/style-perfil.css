@@ -423,18 +423,25 @@ body {
   }
 
   .hamburger {
-    display: block;
-    cursor: pointer;
-    font-size: 1.5rem;
-    position: fixed;
-    top: 1rem;
-    left: 1rem;
-    background: #10b981;
-    color: #fff;
-    padding: 0.5rem 0.8rem;
-    border-radius: 6px;
-    z-index: 1001;
-    border: none;
+  display: block;
+  cursor: pointer;
+  position: absolute;
+  top: 15px;
+  left: 15px; /* ou right: 20px se for editar-perfil */
+  z-index: 1001;
+  background: none; /* pode deixar transparente */
+  border: none;
+}
+  .hamburger-logo {
+  width: 30px;  /* ajusta como quiser */
+  height: 30px;
+  object-fit: contain;
+}
+
+  .hamburger-right {
+  position: absolute;
+  right: 20px;  /* cola na direita */
+  left: auto;   /* garante que não fique deslocado */
   }
 
   /* Layout principal sem margem lateral */
