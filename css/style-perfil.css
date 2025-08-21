@@ -410,38 +410,40 @@ body {
    .sidebar {
     position: fixed;
     top: 0;
-    left: -250px; /* escondida */
+    left: -250px; /* escondida inicialmente */
     width: 220px;
     height: 100%;
     background: #fff;
     transition: left 0.3s ease;
     z-index: 1000;
     padding-top: 60px;
+    display: flex;
+    flex-direction: column;
   }
+
   .sidebar.active {
-    left: 0; /* aparece */
+    left: 0;
   }
 
-  .hamburger {
-  display: block;
-  cursor: pointer;
-  position: absolute;
-  top: 15px;
-  left: 15px; /* ou right: 20px se for editar-perfil */
-  z-index: 1001;
-  background: none; /* pode deixar transparente */
+ /* ---------- HAMBURGUER ---------- */
+.hamburger {
+  background: none;
   border: none;
-}
-  .hamburger-logo {
-  width: 30px;  /* ajusta como quiser */
-  height: 30px;
-  object-fit: contain;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1300;
 }
 
-  .hamburger-right {
+.hamburger-logo {
+  width: 30px;
+  height: auto;
+}
+  .hamburger-left {
   position: absolute;
-  right: 20px;  /* cola na direita */
   left: auto;   /* garante que não fique deslocado */
+  top: 50px
   }
 
   /* Layout principal sem margem lateral */
@@ -535,6 +537,11 @@ body {
     font-size: 1.1rem;
     padding: 1rem;
   }
+  
+   .editar-perfil h1 {
+    text-align: center;
+    width: 100%;
+  }
 
   /* Aviso de senha */
   .editar-perfil .warning {
@@ -558,12 +565,6 @@ body {
   .footer-logo {
     text-align: center;
     margin-top: 0.3rem;
-  }
-
-  /* Header de edição */
-  .header-editar {
-    flex-direction: row;
-    justify-content: space-between;
   }
 
   .hamburger-inline {

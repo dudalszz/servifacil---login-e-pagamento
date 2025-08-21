@@ -1,4 +1,4 @@
-/* RESET E BODY */
+/* ---------- RESET ---------- */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -12,23 +12,33 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  font-size: medium;
 }
 
-/* CONTAINER PRINCIPAL */
+/* ---------- CONTAINER ---------- */
 .container {
   display: flex;
   flex: 1;
 }
 
-/* SIDEBAR */
+/* ---------- SIDEBAR ---------- */
 .sidebar {
   width: 220px;
-  background-color: #ffffff;
+  background-color: #fff;
   border-right: 1px solid #e5e7eb;
   padding: 2rem 1rem;
+  position: fixed; /* sempre fixa */
+  top: 0;
+  left: -240px; /* escondida no mobile */
+  height: 100vh;  /* altura da tela */
+  overflow-y: auto; /* permite rolagem se conteúdo maior que a tela */
+  z-index: 1250;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.12);
+  transition: left 0.3s ease;
 }
 
+.sidebar.active {
+  left: 0;
+}
 
 .logo {
   display: flex;
@@ -45,7 +55,7 @@ body {
   height: 24px;
 }
 
-
+/* ---------- NAV ---------- */
 .sidebar nav ul {
   list-style: none;
   padding: 0;
@@ -68,25 +78,38 @@ body {
   margin-right: 0.5rem;
 }
 
-/* MAIN CONTENT */
-.main-content {
+/* ---------- MAIN ---------- */
+.pagamento-main {
   flex: 1;
-  font-size: 0.9rem;
-  padding: 2.5rem;
+  margin-left: 0; /* mobile inicialmente */
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
 }
 
-h2, h3, h4 {
-  color: #374151;
-  margin-bottom: 1rem;
+/* ---------- BOTÃO HAMBURGUER ---------- */
+.hamburger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto; /* empurra para o lado da logo */
+  z-index: 1300;
+  position: fixed;
+  top: 30px;
+  left: 12px;
 }
 
-.titulo-pagamento {
-  margin-bottom: 2.5rem;
-  font-weight: 900;
-  font-size: 1.2rem;
+.hamburger-logo {
+  width: 30px;
+  height: auto;
 }
 
-
+/* ---------- PAYMENT WRAPPER E CARDS ---------- */
 .payment-wrapper {
   display: flex;
   gap: 2rem;
@@ -94,10 +117,9 @@ h2, h3, h4 {
   box-shadow: 0 0 10px rgba(0,0,0,0.05);
 }
 
-/* PAYMENT DETAILS */
 .payment-details {
   flex: 2;
-  background-color: #ffffff;
+  background-color: #fff;
   border: 1px solid #e5e7eb;
   border-radius: 8px;
   padding: 2rem;
@@ -135,10 +157,10 @@ input, select {
   gap: 1rem;
 }
 
-/* ORDER SUMMARY */
+/* ---------- ORDER SUMMARY ---------- */
 .order-summary {
   flex: 1;
-  background-color: #ffffff;
+  background-color: #fff;
   border-radius: 8px;
   padding: 1.5rem;
   box-shadow: 0 0 10px rgba(0,0,0,0.05);
@@ -209,7 +231,6 @@ input, select {
   color: #111827;
 }
 
-/* SSL NOTE E BOTÕES */
 .ssl-note {
   font-size: 0.85rem;
   color: #10b981;
@@ -250,6 +271,7 @@ input, select {
   text-decoration: none;
 }
 
+/* ---------- FOOTER ---------- */
 .footer {
   background-color: #fff;
   border-top: 1px solid #e5e7eb;
@@ -260,7 +282,7 @@ input, select {
 }
 .footer-top {
   display: flex;
-  justify-content: space-between; /* logo à esquerda / links à direita */
+  justify-content: space-between;
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 0.5rem;
@@ -287,7 +309,6 @@ input, select {
   font-size: 0.85rem;
 }
 
-
 .footer-social {
   display: flex;
   gap: 0.6rem;
@@ -313,69 +334,31 @@ input, select {
   margin-top: 0.5rem;
 }
 
-/* Botão hamburguer */
-.hamburger {
-  display: none;
-  font-size: 1.8rem;
-  cursor: pointer;
-  background: none;
-  border: none;
-  color: #333;
-  position: absolute;
-  left: 15px;  /* fica na esquerda */
-  top: 15px;
-  z-index: 1001; /* acima da sidebar */
-}
-
-/* Sidebar no mobile */
-@media (max-width: 768px) {
+/* ---------- MEDIA QUERIES ---------- */
+@media(min-width: 769px) {
   .sidebar {
-    position: fixed;
-    top: 0;
-    left: -250px; /* escondida */
-    width: 220px;
-    height: 100%;
-    background: #fff;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.2);
-    transition: left 0.3s ease;
-    z-index: 1000;
-    padding-top: 60px; /* espaço p/ logo */
-  }
-
-  .sidebar.active {
-    left: 0; /* aparece quando ativo */
+    left: 0;
+    position: relative;
+    padding: 2rem 1rem;
+    box-shadow: none;
   }
 
   .hamburger {
-  display: block;
-  cursor: pointer;
-  position: absolute;
-  top: 15px;
-  left: 15px; /* ou right: 20px se for editar-perfil */
-  z-index: 1001;
-  background: none; /* pode deixar transparente */
-  border: none;
-}
-  .hamburger-logo {
-  width: 30px;  /* ajusta como quiser */
-  height: 30px;
-  object-fit: contain;
-}
+    display: none;
+  }
 
-  /* Footer centralizado */
-  .footer-top {
+  .pagamento-main {
+    display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start; /* tudo alinhado à esquerda */
   }
+}
 
-  .footer-links,
-  .footer-social {
-    justify-content: center;
-  }
-
-  .footer-logo {
-    margin-top: 0.3rem;
-    text-align: center;
+@media (max-width: 768px) {
+  .pagamento-main {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centraliza o conteúdo */
+    text-align: center; /* garante que texto fique centralizado */
   }
 }
