@@ -361,4 +361,24 @@ input, select {
     align-items: center; /* centraliza o conteúdo */
     text-align: center; /* garante que texto fique centralizado */
   }
+
+  .footer-top {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-links,
+  .footer-social {
+    justify-content: center;
+  }
+
+  .footer-logo {
+    text-align: center;
+    margin-top: 0.3rem;
+  }
+
+  .footer-copy {
+    text-align: center;
+  }
 }
