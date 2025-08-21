@@ -26,11 +26,11 @@ body {
   background-color: #fff;
   border-right: 1px solid #e5e7eb;
   padding: 2rem 1rem;
-  position: fixed; /* sempre fixa */
+  position: fixed;
   top: 0;
-  left: -240px; /* escondida no mobile */
-  height: 100vh;  /* altura da tela */
-  overflow-y: auto; /* permite rolagem se conteúdo maior que a tela */
+  left: -240px;
+  height: 100vh;  
+  overflow-y: auto;
   z-index: 1250;
   box-shadow: 2px 0 8px rgba(0,0,0,0.12);
   transition: left 0.3s ease;
@@ -81,7 +81,7 @@ body {
 /* ---------- MAIN ---------- */
 .pagamento-main {
   flex: 1;
-  margin-left: 0; /* mobile inicialmente */
+  margin-left: 0; 
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -97,7 +97,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-left: auto; /* empurra para o lado da logo */
+  margin-left: auto;
   z-index: 1300;
   position: fixed;
   top: 30px;
@@ -350,7 +350,7 @@ input, select {
   .pagamento-main {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* tudo alinhado à esquerda */
+    align-items: flex-start; 
   }
 }
 
@@ -358,8 +358,8 @@ input, select {
   .pagamento-main {
     display: flex;
     flex-direction: column;
-    align-items: center; /* centraliza o conteúdo */
-    text-align: center; /* garante que texto fique centralizado */
+    align-items: center;
+    text-align: center; 
   }
 
   .footer-top {
