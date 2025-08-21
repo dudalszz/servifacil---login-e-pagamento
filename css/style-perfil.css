@@ -87,7 +87,7 @@ body {
 .main {
   flex: 1;
   padding: 2rem 3rem;
-  margin-left: 200px; /* reduzido de 220px */
+  margin-left: 200px; 
   display: flex;
   flex-direction: column;
   align-items: flex-start; /* alinha conteúdo à esquerda */
@@ -248,7 +248,6 @@ body {
   box-shadow: none;
 }
 
-/* Foco no campo */
 .editar-perfil .info-block input:focus,
 .editar-perfil .info-block select:focus {
   box-shadow: none;
@@ -410,7 +409,7 @@ body {
    .sidebar {
     position: fixed;
     top: 0;
-    left: -250px; /* escondida inicialmente */
+    left: -250px;
     width: 220px;
     height: 100%;
     background: #fff;
@@ -442,11 +441,10 @@ body {
 }
   .hamburger-left {
   position: absolute;
-  left: auto;   /* garante que não fique deslocado */
+  left: auto;
   top: 50px
   }
 
-  /* Layout principal sem margem lateral */
   .main,
   .editar-perfil {
     margin-left: 0;
