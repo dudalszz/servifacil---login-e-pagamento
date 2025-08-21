@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Perfil - ServiFácil</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/style-perfil.css" />
+    <link rel="stylesheet" href="../css/style-perfil.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -15,14 +15,14 @@
     <button
     class="hamburger hamburger-left"
     onclick="document.querySelector('.sidebar').classList.toggle('active')">
-    <img src="/perfil/logo.png" alt="Logo ServiFácil" class="hamburger-logo">
+    <img src="logo.png" alt="Logo ServiFácil" class="hamburger-logo">
 </button>
 
 
     <div class="layout">
       <aside class="sidebar">
         <div class="logo">
-          <img src="/perfil/logo.png" alt="Logo ServiFácil" class="logo-icon" />
+          <img src="logo.png" alt="Logo ServiFácil" class="logo-icon" />
           <span>ServiFácil</span>
         </div>
         <nav>
@@ -45,7 +45,7 @@
 
       <main class="main editar-perfil">
         <div class="card profile-card">
-          <img src="/perfil/img.png" alt="Foto de perfil" />
+          <img src="img.png" alt="Foto de perfil" />
           <h2>Andrés Almeida</h2>
           <div class="status"><i class="fas fa-circle-check"></i> Usuário ativo</div>
 
@@ -94,15 +94,7 @@
       <div class="footer-copy">© 2023 ServiFácil. Todos os direitos reservados.</div>
     </footer>
 
-    <script>
-      const logoBtns = document.querySelectorAll(".logo-mobile");
-      const sidebar = document.querySelector(".sidebar");
-
-      logoBtns.forEach(btn => {
-        btn.addEventListener("click", () => {
-          sidebar.classList.toggle("active");
-        });
-      });
+    <script src="perfil.js">
     </script>
   </body>
 </html>

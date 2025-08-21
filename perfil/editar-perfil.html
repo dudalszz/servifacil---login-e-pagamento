@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Editar Perfil - ServiFácil</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/css/style-perfil.css" />
+    <link rel="stylesheet" href="../css/style-perfil.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -15,7 +15,7 @@
    <button
     class="hamburger hamburger-left"
     onclick="document.querySelector('.sidebar').classList.toggle('active')">
-    <img src="/perfil/logo.png" alt="Logo ServiFácil" class="hamburger-logo">
+    <img src="logo.png" alt="Logo ServiFácil" class="hamburger-logo">
 </button>
     <div class="layout">
       <aside class="sidebar">
@@ -51,7 +51,7 @@
               atualizadas.
             </span>
           </div>
-
+          <form id="form-edicao">
           <div class="section-card">
             <h2>Informações Pessoais</h2>
             <div class="info-block">
@@ -120,9 +120,10 @@
             </div>
             <div class="warning">Deixe em branco se não deseja alterar a senha atual.</div>
             <div class="button-group">
-              <button class="save-btn">Salvar Alterações</button>
+              <button type="submit" class="save-btn">Salvar Alterações</button>
               <button class="cancel-btn" onclick="window.location.href='perfil.html'">Cancelar</button>
             </div>
+          </form>
           </div>
         </div>
       </main>
@@ -145,5 +146,6 @@
       </div>
       <div class="footer-copy">© 2023 ServiFácil. Todos os direitos reservados.</div>
     </footer>
+    <script src="perfil.js"></script>
   </body>
 </html>

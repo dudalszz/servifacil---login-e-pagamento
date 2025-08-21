@@ -3,7 +3,7 @@ function irParaEdicao() {
 }
 
 function voltarParaPerfil() {
-  window.location.href = "index.html";
+  window.location.href = "perfil.html";
 }
 
 document.getElementById("form-edicao")?.addEventListener("submit", function (e) {
