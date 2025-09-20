@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/servifacil---login-e-pagamento/static/css/main.f16a9157.css",
+    "main.js": "/servifacil---login-e-pagamento/static/js/main.e8283037.js",
+    "index.html": "/servifacil---login-e-pagamento/index.html",
+    "main.f16a9157.css.map": "/servifacil---login-e-pagamento/static/css/main.f16a9157.css.map",
+    "main.e8283037.js.map": "/servifacil---login-e-pagamento/static/js/main.e8283037.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f16a9157.css",
+    "static/js/main.e8283037.js"
+  ]
+}
