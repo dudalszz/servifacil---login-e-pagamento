@@ -142,9 +142,12 @@ const Notifications = () => {
           </div>
         </div>
 
-        <div className="section-card">
+        <div className="section-card privacy-section">
           <h2>Frequência</h2>
-          <div className="info-block" style={{ gap: 16 }}>
+          <div
+            className="frequency-group"
+            style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
+          >
             <label>
               <input
                 type="radio"
@@ -153,7 +156,18 @@ const Notifications = () => {
                 checked={settings.frequency === "immediate"}
                 onChange={handleFrequency}
               />
-              Imediato
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                }}
+              >
+                <span style={{ fontWeight: "600" }}>Imediato</span>
+                <small style={{ color: "#6b7280", fontSize: "0.8rem" }}>
+                  Receba notificações instantaneamente
+                </small>
+              </div>
             </label>
             <label>
               <input
@@ -163,7 +177,18 @@ const Notifications = () => {
                 checked={settings.frequency === "daily"}
                 onChange={handleFrequency}
               />
-              Diário
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                }}
+              >
+                <span style={{ fontWeight: "600" }}>Diário</span>
+                <small style={{ color: "#6b7280", fontSize: "0.8rem" }}>
+                  Resumo diário às 9h
+                </small>
+              </div>
             </label>
             <label>
               <input
@@ -173,14 +198,28 @@ const Notifications = () => {
                 checked={settings.frequency === "weekly"}
                 onChange={handleFrequency}
               />
-              Semanal
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                }}
+              >
+                <span style={{ fontWeight: "600" }}>Semanal</span>
+                <small style={{ color: "#6b7280", fontSize: "0.8rem" }}>
+                  Resumo semanal às segundas
+                </small>
+              </div>
             </label>
           </div>
         </div>
 
-        <div className="section-card">
+        <div className="section-card notification-section">
           <h2>Canais</h2>
-          <div className="info-block" style={{ gap: 16, flexWrap: "wrap" }}>
+          <div
+            className="channels-group"
+            style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}
+          >
             <label>
               <input
                 type="checkbox"
@@ -188,7 +227,23 @@ const Notifications = () => {
                 checked={settings.channels.includes("email")}
                 onChange={() => handleChannel("email")}
               />
-              E-mail
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
+              >
+                <i className="fas fa-envelope" style={{ color: "#10b981" }}></i>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                  }}
+                >
+                  <span style={{ fontWeight: "600" }}>E-mail</span>
+                  <small style={{ color: "#6b7280", fontSize: "0.8rem" }}>
+                    Notificações por e-mail
+                  </small>
+                </div>
+              </div>
             </label>
             <label>
               <input
@@ -197,7 +252,28 @@ const Notifications = () => {
                 checked={settings.channels.includes("push")}
                 onChange={() => handleChannel("push")}
               />
-              Push (navegador/app)
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
+              >
+                <i
+                  className="fas fa-mobile-alt"
+                  style={{ color: "#10b981" }}
+                ></i>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                  }}
+                >
+                  <span style={{ fontWeight: "600" }}>
+                    Push (navegador/app)
+                  </span>
+                  <small style={{ color: "#6b7280", fontSize: "0.8rem" }}>
+                    Notificações no dispositivo
+                  </small>
+                </div>
+              </div>
             </label>
             <label>
               <input
@@ -206,7 +282,23 @@ const Notifications = () => {
                 checked={settings.channels.includes("sms")}
                 onChange={() => handleChannel("sms")}
               />
-              SMS
+              <div
+                style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
+              >
+                <i className="fas fa-sms" style={{ color: "#10b981" }}></i>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "flex-start",
+                  }}
+                >
+                  <span style={{ fontWeight: "600" }}>SMS</span>
+                  <small style={{ color: "#6b7280", fontSize: "0.8rem" }}>
+                    Mensagens de texto
+                  </small>
+                </div>
+              </div>
             </label>
           </div>
         </div>

@@ -3,29 +3,28 @@ import { useNavigate } from "react-router-dom";
 
 const EditProfile = () => {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState(() => {
-    const defaults = {
-      nome: "Andrés Almeida",
-      telefone: "(11) 99999-8888",
-      cpf: "123.456.789-00",
-      usuario: "andres.almeida",
-      email: "andres@email.com",
-      rua: "Rua das Flores",
-      numero: "123",
-      bairro: "Centro",
-      cidade: "São Paulo",
-      estado: "São Paulo",
-      cep: "01234-567",
-      senha: "",
-      confirmar: "",
-    };
-    try {
-      const stored = localStorage.getItem("profile_form");
-      return stored ? JSON.parse(stored) : defaults;
-    } catch (_) {
-      return defaults;
-    }
+  const [formData, setFormData] = useState({
+    nome: "",
+    telefone: "",
+    cpf: "",
+    usuario: "",
+    email: "",
+    rua: "",
+    numero: "",
+    bairro: "",
+    cidade: "",
+    estado: "",
+    cep: "",
+    senha: "",
+    confirmar: "",
   });
+
+  useEffect(() => {
+    // Limpa localStorage existente ao montar o componente
+    try {
+      localStorage.removeItem("profile_form");
+    } catch (_) {}
+  }, []);
 
   useEffect(() => {
     try {
@@ -41,10 +40,52 @@ const EditProfile = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Dados salvos com sucesso!");
-    navigate("/perfil");
+
+    // Payload mapeado para o backend
+    const payload = {
+      name: formData.nome,
+      email: formData.email,
+      phone: formData.telefone,
+      cpf: formData.cpf,
+      username: formData.usuario,
+      address: {
+        street: formData.rua,
+        number: formData.numero,
+        neighborhood: formData.bairro,
+        city: formData.cidade,
+        state: formData.estado,
+        zip: formData.cep,
+      },
+      password: formData.senha || undefined, // se vazio, não altera
+    };
+
+    try {
+      // Persistir o perfil localmente, eliminando dependência de backend
+      const profileToSave = {
+        id: 1,
+        name: payload.name,
+        email: payload.email,
+        phone: payload.phone,
+        cpf: payload.cpf,
+        username: payload.username,
+        address: payload.address,
+      };
+
+      localStorage.setItem("profile", JSON.stringify(profileToSave));
+
+      // Opcionalmente, limpar o rascunho do formulário
+      try {
+        localStorage.removeItem("profile_form");
+      } catch (_) {}
+
+      alert("Dados salvos com sucesso!");
+      navigate("/perfil");
+    } catch (error) {
+      console.error("Erro ao salvar dados localmente:", error);
+      alert("Falha ao salvar dados");
+    }
   };
 
   const handleReset = () => {
@@ -52,17 +93,17 @@ const EditProfile = () => {
       localStorage.removeItem("profile_form");
     } catch (_) {}
     setFormData({
-      nome: "Andrés Almeida",
-      telefone: "(11) 99999-8888",
-      cpf: "123.456.789-00",
-      usuario: "andres.almeida",
-      email: "andres@email.com",
-      rua: "Rua das Flores",
-      numero: "123",
-      bairro: "Centro",
-      cidade: "São Paulo",
-      estado: "São Paulo",
-      cep: "01234-567",
+      nome: "",
+      telefone: "",
+      cpf: "",
+      usuario: "",
+      email: "",
+      rua: "",
+      numero: "",
+      bairro: "",
+      cidade: "",
+      estado: "",
+      cep: "",
       senha: "",
       confirmar: "",
     });
@@ -197,9 +238,34 @@ const EditProfile = () => {
                 value={formData.estado}
                 onChange={handleInputChange}
               >
-                <option value="São Paulo">São Paulo</option>
-                <option value="Rio de Janeiro">Rio de Janeiro</option>
-                <option value="Minas Gerais">Minas Gerais</option>
+                <option value="">Selecione o estado</option>
+                <option value="AC">AC - Acre</option>
+                <option value="AL">AL - Alagoas</option>
+                <option value="AP">AP - Amapá</option>
+                <option value="AM">AM - Amazonas</option>
+                <option value="BA">BA - Bahia</option>
+                <option value="CE">CE - Ceará</option>
+                <option value="DF">DF - Distrito Federal</option>
+                <option value="ES">ES - Espírito Santo</option>
+                <option value="GO">GO - Goiás</option>
+                <option value="MA">MA - Maranhão</option>
+                <option value="MT">MT - Mato Grosso</option>
+                <option value="MS">MS - Mato Grosso do Sul</option>
+                <option value="MG">MG - Minas Gerais</option>
+                <option value="PA">PA - Pará</option>
+                <option value="PB">PB - Paraíba</option>
+                <option value="PR">PR - Paraná</option>
+                <option value="PE">PE - Pernambuco</option>
+                <option value="PI">PI - Piauí</option>
+                <option value="RJ">RJ - Rio de Janeiro</option>
+                <option value="RN">RN - Rio Grande do Norte</option>
+                <option value="RS">RS - Rio Grande do Sul</option>
+                <option value="RO">RO - Rondônia</option>
+                <option value="RR">RR - Roraima</option>
+                <option value="SC">SC - Santa Catarina</option>
+                <option value="SP">SP - São Paulo</option>
+                <option value="SE">SE - Sergipe</option>
+                <option value="TO">TO - Tocantins</option>
               </select>
             </div>
             <div className="info-block">

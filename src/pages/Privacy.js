@@ -69,9 +69,12 @@ const Privacy = () => {
           </div>
         </div>
 
-        <div className="section-card">
+        <div className="section-card privacy-section">
           <h2>Visibilidade do Perfil</h2>
-          <div className="info-block" style={{ gap: 16, flexWrap: "wrap" }}>
+          <div
+            className="visibility-group"
+            style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}
+          >
             <label title="Público: qualquer pessoa pode ver seu portfólio e avaliações.">
               <input
                 type="radio"
@@ -82,7 +85,18 @@ const Privacy = () => {
                   setState((p) => ({ ...p, visibility: e.target.value }))
                 }
               />
-              Público
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                }}
+              >
+                <span style={{ fontWeight: "600" }}>Público</span>
+                <small style={{ color: "#6b7280", fontSize: "0.8rem" }}>
+                  Qualquer pessoa pode ver seu perfil
+                </small>
+              </div>
             </label>
             <label>
               <input
@@ -94,7 +108,18 @@ const Privacy = () => {
                   setState((p) => ({ ...p, visibility: e.target.value }))
                 }
               />
-              Somente clientes
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                }}
+              >
+                <span style={{ fontWeight: "600" }}>Somente clientes</span>
+                <small style={{ color: "#6b7280", fontSize: "0.8rem" }}>
+                  Apenas clientes ativos podem ver
+                </small>
+              </div>
             </label>
             <label>
               <input
@@ -106,21 +131,65 @@ const Privacy = () => {
                   setState((p) => ({ ...p, visibility: e.target.value }))
                 }
               />
-              Privado
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-start",
+                }}
+              >
+                <span style={{ fontWeight: "600" }}>Privado</span>
+                <small style={{ color: "#6b7280", fontSize: "0.8rem" }}>
+                  Perfil completamente privado
+                </small>
+              </div>
             </label>
           </div>
-          <div className="warning" style={{ textAlign: "left" }}>
-            "Público: qualquer pessoa pode ver seu portfólio e avaliações."
+          <div
+            className="warning"
+            style={{
+              textAlign: "left",
+              marginTop: "1rem",
+              padding: "0.75rem 1rem",
+              background: "#fef3c7",
+              border: "1px solid #f59e0b",
+              borderRadius: "8px",
+              color: "#92400e",
+            }}
+          >
+            <i
+              className="fas fa-info-circle"
+              style={{ marginRight: "0.5rem" }}
+            ></i>
+            <strong>Dica:</strong> Perfis públicos recebem mais propostas de
+            trabalho.
           </div>
         </div>
 
-        <div className="section-card">
+        <div className="section-card privacy-section">
           <h2>Status Online</h2>
           <div
             className="info-block"
-            style={{ justifyContent: "space-between", alignItems: "center" }}
+            style={{
+              justifyContent: "space-between",
+              alignItems: "center",
+              padding: "1rem",
+              background: "#f9fafb",
+              borderRadius: "8px",
+            }}
           >
-            <span>Mostrar "Disponível"</span>
+            <div
+              style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
+            >
+              <i
+                className="fas fa-circle"
+                style={{
+                  color: state.online ? "#10b981" : "#6b7280",
+                  fontSize: "0.8rem",
+                }}
+              ></i>
+              <span>Mostrar "Disponível"</span>
+            </div>
             <label className="switch">
               <input
                 type="checkbox"
@@ -133,27 +202,35 @@ const Privacy = () => {
           </div>
         </div>
 
-        <div className="section-card">
+        <div className="section-card privacy-section">
           <h2>Controle de Dados</h2>
           <div
-            className="button-group"
+            className="button-group data-control"
             style={{ justifyContent: "flex-start", gap: 12 }}
           >
             <button className="save-btn" onClick={handleDownloadData}>
+              <i
+                className="fas fa-download"
+                style={{ marginRight: "0.5rem" }}
+              ></i>
               Baixar meus dados
             </button>
             <button
               className="cancel-btn"
               onClick={() => setShowDeleteModal(true)}
             >
+              <i className="fas fa-trash" style={{ marginRight: "0.5rem" }}></i>
               Excluir conta
             </button>
           </div>
         </div>
 
-        <div className="section-card">
+        <div className="section-card privacy-section">
           <h2>Bloqueio e Denúncia</h2>
-          <div className="info-block" style={{ gap: 12, flexWrap: "wrap" }}>
+          <div
+            className="info-block"
+            style={{ gap: 12, flexWrap: "wrap", marginBottom: "1rem" }}
+          >
             <input
               type="text"
               placeholder="Buscar usuário para bloquear"
@@ -161,14 +238,38 @@ const Privacy = () => {
               onChange={(e) =>
                 setState((p) => ({ ...p, blockedSearch: e.target.value }))
               }
+              style={{ flex: 1, minWidth: "200px" }}
             />
           </div>
           <div
-            className="info-block"
-            style={{ flexDirection: "column", alignItems: "stretch", gap: 8 }}
+            className="blocked-list"
+            style={{
+              flexDirection: "column",
+              alignItems: "stretch",
+              gap: 8,
+              maxHeight: "200px",
+              overflowY: "auto",
+              padding: "0.5rem",
+              background: "#f9fafb",
+              borderRadius: "8px",
+              border: "1px solid #e5e7eb",
+            }}
           >
             {filteredBlocked.length === 0 && (
-              <span style={{ color: "#6b7280" }}>Nenhum usuário bloqueado</span>
+              <div
+                style={{
+                  color: "#6b7280",
+                  textAlign: "center",
+                  padding: "1rem",
+                  fontStyle: "italic",
+                }}
+              >
+                <i
+                  className="fas fa-user-slash"
+                  style={{ marginRight: "0.5rem" }}
+                ></i>
+                Nenhum usuário bloqueado
+              </div>
             )}
             {filteredBlocked.map((user) => (
               <div
@@ -177,13 +278,22 @@ const Privacy = () => {
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
+                  padding: "0.75rem",
+                  background: "#fff",
+                  borderRadius: "6px",
+                  border: "1px solid #e5e7eb",
                 }}
               >
-                <span>@{user}</span>
+                <span style={{ fontWeight: "500" }}>@{user}</span>
                 <button
                   className="cancel-btn"
                   onClick={() => handleUnblock(user)}
+                  style={{ padding: "0.4rem 0.8rem", fontSize: "0.85rem" }}
                 >
+                  <i
+                    className="fas fa-unlock"
+                    style={{ marginRight: "0.3rem" }}
+                  ></i>
                   Desbloquear
                 </button>
               </div>
