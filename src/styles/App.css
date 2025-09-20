@@ -168,6 +168,21 @@ body {
   margin-bottom: 2rem;
 }
 
+/* ---------- ERROR STYLES ---------- */
+.error {
+  border-color: #ef4444 !important;
+  background-color: #fef2f2 !important;
+}
+
+.error-message {
+  display: block;
+  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
+  color: #b91c1c;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
 .profile-info input,
 .info-box input,
 .info-box select {

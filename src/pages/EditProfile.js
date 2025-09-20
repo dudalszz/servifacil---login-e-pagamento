@@ -18,6 +18,9 @@ const EditProfile = () => {
     senha: "",
     confirmar: "",
   });
+  
+  const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // Limpa localStorage existente ao montar o componente
@@ -34,14 +37,172 @@ const EditProfile = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    
+    // Limpar erro do campo quando começar a digitar
+    if (errors[name]) {
+      setErrors(prev => ({ ...prev, [name]: null }));
+    }
+    
+    let v = value;
+    
+    // Campos que só aceitam números
+    if (name === "telefone") {
+      v = value.replace(/\D/g, "").slice(0, 11);
+      // Formatar telefone: (00) 00000-0000
+      if (v.length > 10) {
+        v = v.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+      } else if (v.length > 6) {
+        v = v.replace(/(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3");
+      } else if (v.length > 2) {
+        v = v.replace(/(\d{2})(\d{0,5})/, "($1) $2");
+      }
+    } else if (name === "cpf") {
+      v = value.replace(/\D/g, "").slice(0, 11);
+      // Formatar CPF: 000.000.000-00
+      if (v.length > 9) {
+        v = v.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+      } else if (v.length > 6) {
+        v = v.replace(/(\d{3})(\d{3})(\d{0,3})/, "$1.$2.$3");
+      } else if (v.length > 3) {
+        v = v.replace(/(\d{3})(\d{0,3})/, "$1.$2");
+      }
+    } else if (name === "numero") {
+      v = value.replace(/\D/g, "").slice(0, 10);
+    } else if (name === "cep") {
+      v = value.replace(/\D/g, "").slice(0, 8);
+      if (v.length > 5) {
+        v = v.replace(/(\d{5})(\d{1,3})/, "$1-$2");
+      }
+    }
+    // Campos que só aceitam letras e espaços
+    else if (name === "nome" || name === "cidade" || name === "bairro") {
+      v = value.replace(/[^a-zA-ZÀ-ÿ\s]/g, "").slice(0, 50);
+    }
+    // Campo de usuário: letras, números e alguns caracteres especiais
+    else if (name === "usuario") {
+      v = value.replace(/[^a-zA-Z0-9._-]/g, "").slice(0, 30);
+    }
+    // Campo de rua aceita letras, números e alguns caracteres
+    else if (name === "rua") {
+      v = value.replace(/[^a-zA-ZÀ-ÿ0-9\s,.-]/g, "").slice(0, 100);
+    }
+    // Email: validação básica será feita na validação do formulário
+    else if (name === "email") {
+      v = value.slice(0, 100);
+    }
+    // Senhas: sem restrições especiais, mas com limite de tamanho
+    else if (name === "senha" || name === "confirmar") {
+      v = value.slice(0, 50);
+    }
+    
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: v,
     }));
+  };
+
+  const validateForm = () => {
+    const errs = {};
+    
+    // Validação do nome
+    if (!formData.nome.trim()) {
+      errs.nome = "Nome é obrigatório";
+    } else if (formData.nome.trim().length < 2) {
+      errs.nome = "Nome deve ter pelo menos 2 caracteres";
+    }
+    
+    // Validação do telefone
+    const telefoneClean = formData.telefone.replace(/\D/g, "");
+    if (!telefoneClean) {
+      errs.telefone = "Telefone é obrigatório";
+    } else if (telefoneClean.length < 10) {
+      errs.telefone = "Telefone deve ter pelo menos 10 dígitos";
+    }
+    
+    // Validação do CPF
+    const cpfClean = formData.cpf.replace(/\D/g, "");
+    if (!cpfClean) {
+      errs.cpf = "CPF é obrigatório";
+    } else if (cpfClean.length !== 11) {
+      errs.cpf = "CPF deve ter 11 dígitos";
+    }
+    
+    // Validação do usuário
+    if (!formData.usuario.trim()) {
+      errs.usuario = "Nome de usuário é obrigatório";
+    } else if (formData.usuario.trim().length < 3) {
+      errs.usuario = "Nome de usuário deve ter pelo menos 3 caracteres";
+    }
+    
+    // Validação do email
+    if (!formData.email.trim()) {
+      errs.email = "Email é obrigatório";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      errs.email = "Email inválido";
+    }
+    
+    // Validação do endereço
+    if (!formData.rua.trim()) {
+      errs.rua = "Rua é obrigatória";
+    } else if (formData.rua.trim().length < 5) {
+      errs.rua = "Rua deve ter pelo menos 5 caracteres";
+    }
+    
+    if (!formData.numero.trim()) {
+      errs.numero = "Número é obrigatório";
+    }
+    
+    if (!formData.bairro.trim()) {
+      errs.bairro = "Bairro é obrigatório";
+    } else if (formData.bairro.trim().length < 2) {
+      errs.bairro = "Bairro deve ter pelo menos 2 caracteres";
+    }
+    
+    if (!formData.cidade.trim()) {
+      errs.cidade = "Cidade é obrigatória";
+    } else if (formData.cidade.trim().length < 2) {
+      errs.cidade = "Cidade deve ter pelo menos 2 caracteres";
+    }
+    
+    if (!formData.estado) {
+      errs.estado = "Estado é obrigatório";
+    }
+    
+    // Validação do CEP
+    if (!formData.cep.trim()) {
+      errs.cep = "CEP é obrigatório";
+    } else if (!/^\d{5}-\d{3}$/.test(formData.cep)) {
+      errs.cep = "CEP inválido (formato: 00000-000)";
+    }
+    
+    // Validação das senhas (opcionais, mas se preenchidas devem ser válidas)
+    if (formData.senha || formData.confirmar) {
+      if (!formData.senha) {
+        errs.senha = "Digite a nova senha";
+      } else if (formData.senha.length < 6) {
+        errs.senha = "Senha deve ter pelo menos 6 caracteres";
+      }
+      
+      if (!formData.confirmar) {
+        errs.confirmar = "Confirme a nova senha";
+      } else if (formData.senha !== formData.confirmar) {
+        errs.confirmar = "Senhas não coincidem";
+      }
+    }
+    
+    setErrors(errs);
+    return Object.keys(errs).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validar formulário antes de enviar
+    if (!validateForm()) {
+      return;
+    }
+
+    setLoading(true);
 
     // Payload mapeado para o backend
     const payload = {
@@ -85,6 +246,8 @@ const EditProfile = () => {
     } catch (error) {
       console.error("Erro ao salvar dados localmente:", error);
       alert("Falha ao salvar dados");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -136,7 +299,9 @@ const EditProfile = () => {
                 placeholder="Nome completo"
                 value={formData.nome}
                 onChange={handleInputChange}
+                className={errors.nome ? "error" : ""}
               />
+              {errors.nome && <span className="error-message">{errors.nome}</span>}
             </div>
             <div className="info-block">
               <i className="fas fa-phone"></i>

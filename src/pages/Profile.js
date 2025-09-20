@@ -25,7 +25,13 @@ const Profile = () => {
 
   return (
     <div className="card profile-card">
-      <img src="/images/img.png" alt="Foto de perfil" />
+      <img
+        src={profile?.avatar || "/images/img.png"}
+        alt="Foto de perfil"
+        onError={(e) => {
+          e.currentTarget.src = `${process.env.PUBLIC_URL || ""}/images/img.png`;
+        }}
+      />
       <h2>{profile?.name || "Nome do Usuário"}</h2>
       <div className="status">
         <i className="fas fa-circle-check"></i> Usuário ativo
