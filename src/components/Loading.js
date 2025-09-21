@@ -66,24 +66,40 @@ export const ButtonLoading = ({ loading, children, ...props }) => {
           style={{
             display: "flex",
             alignItems: "center",
+            justifyContent: "center",
             gap: "0.5rem",
+            minHeight: "48px",
           }}
         >
           <div
             style={{
-              width: "16px",
-              height: "16px",
+              width: "18px",
+              height: "18px",
               border: "2px solid transparent",
               borderTop: "2px solid currentColor",
               borderRadius: "50%",
               animation: "spin 1s linear infinite",
+              flexShrink: 0,
             }}
           />
-          Carregando...
+          <span style={{ fontSize: "1rem", fontWeight: "600" }}>
+            Carregando...
+          </span>
         </div>
       ) : (
         children
       )}
+
+      <style jsx>{`
+        @keyframes spin {
+          0% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+      `}</style>
     </button>
   );
 };
