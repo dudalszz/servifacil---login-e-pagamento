@@ -283,6 +283,18 @@ input[type="radio"]:focus {
   border: none !important;
 }
 
+/* ---------- FIX PROFILE PAGE STABILITY ---------- */
+.card {
+  transform: none !important;
+  animation: none !important;
+  will-change: auto !important;
+}
+
+.profile-info input {
+  transition: none !important;
+  transform: none !important;
+}
+
 /* ---------- SECURITY INFO GLOBAL STYLES (IGUAL AO HELP) ---------- */
 .editar-perfil .security-info,
 .security-info {

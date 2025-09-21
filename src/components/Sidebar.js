@@ -26,9 +26,12 @@ const Sidebar = ({ isActive, onToggle }) => {
           }}
         >
           <img
-            src="/images/logo.png"
+            src={`${process.env.PUBLIC_URL || ""}/images/logo.png`}
             alt="Logo ServiFácil"
             className="logo-icon"
+            onError={(e) => {
+              e.currentTarget.src = `${process.env.PUBLIC_URL || ""}/images/logo.png`;
+            }}
           />
           <span>ServiFácil</span>
         </div>

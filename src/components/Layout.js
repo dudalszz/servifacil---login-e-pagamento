@@ -43,9 +43,12 @@ const Layout = ({ children }) => {
         aria-label="Abrir menu"
       >
         <img
-          src="/images/logo.png"
+          src={`${process.env.PUBLIC_URL || ""}/images/logo.png`}
           alt="Abrir menu"
           className="hamburger-logo"
+          onError={(e) => {
+            e.currentTarget.src = `${process.env.PUBLIC_URL || ""}/images/logo.png`;
+          }}
         />
       </button>
       <div className="layout">
