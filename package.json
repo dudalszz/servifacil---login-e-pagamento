@@ -2,7 +2,7 @@
   "name": "projeto-servif",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://dudalszz.github.io/servifacil---login-e-pagamento",
+  "homepage": "https://dudalszz.github.io/servifacil---login-e-pagamento/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
