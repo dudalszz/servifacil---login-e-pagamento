@@ -14,15 +14,11 @@
   display: flex;
   gap: 2rem;
   flex-wrap: wrap;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
 }
+
 
 .payment-details {
   flex: 2;
-  background-color: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-  padding: 2rem;
 }
 
 .section {
@@ -62,11 +58,6 @@ select {
 /* ---------- ORDER SUMMARY ---------- */
 .order-summary {
   flex: 1;
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 1.5rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-  font-family: "Inter", sans-serif;
 }
 
 /* ---------- INPUT GROUPS AND ERRORS ---------- */

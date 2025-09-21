@@ -216,11 +216,13 @@ const Payments = () => {
   };
 
   return (
-    <div className="pagamento-main">
-      <h2>Finalizar Pagamento</h2>
+    <div className="pagamento-main editar-perfil">
+      <div className="header-editar">
+        <h1>Finalizar Pagamento</h1>
+      </div>
 
       <div className="payment-wrapper">
-        <section className="payment-details">
+        <section className="payment-details section-card">
           <h3 className="titulo-pagamento">Dados de Pagamento</h3>
 
           <div className="section">
@@ -368,7 +370,7 @@ const Payments = () => {
           </div>
         </section>
 
-        <aside className="order-summary">
+        <aside className="order-summary section-card">
           <h3>Resumo do Pedido</h3>
 
           <div className="service">

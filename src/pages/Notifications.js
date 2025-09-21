@@ -306,7 +306,7 @@ const Notifications = () => {
 
         <div className="button-group" style={{ marginTop: "1rem", justifyContent: "center" }}>
           <button
-            className="cancel-btn"
+            className="save-btn"
             onClick={() => setSettings(initialState)}
             aria-label="Restaurar preferências padrão"
           >
