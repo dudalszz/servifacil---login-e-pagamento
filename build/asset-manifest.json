@@ -1,5 +1,6 @@
 {
   "files": {
+<<<<<<< HEAD
     "main.css": "/servifacil---login-e-pagamento/static/css/main.5c3ff404.css",
     "main.js": "/servifacil---login-e-pagamento/static/js/main.fdc0df6b.js",
     "index.html": "/servifacil---login-e-pagamento/index.html",
@@ -9,5 +10,16 @@
   "entrypoints": [
     "static/css/main.5c3ff404.css",
     "static/js/main.fdc0df6b.js"
+=======
+    "main.css": "/static/css/main.96da18ad.css",
+    "main.js": "/static/js/main.72462a4c.js",
+    "index.html": "/index.html",
+    "main.96da18ad.css.map": "/static/css/main.96da18ad.css.map",
+    "main.72462a4c.js.map": "/static/js/main.72462a4c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.96da18ad.css",
+    "static/js/main.72462a4c.js"
+>>>>>>> 6f87d9ebb236bac258f80a262d97bff5b8f8ecce
   ]
 }
