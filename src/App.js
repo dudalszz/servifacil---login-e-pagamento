@@ -14,14 +14,11 @@ import "./styles/App.css";
 
 function App() {
   return (
-    <div style={{ padding: '20px', background: '#f0f0f0', minHeight: '100vh' }}>
-      <h1 style={{ color: '#10b981', textAlign: 'center' }}>🚀 ServiFácil - Carregando...</h1>
-      <ErrorBoundary>
-        <AuthProvider>
-          <Router>
-            <div className="App">
-              {/* Debug: App carregado com sucesso */}
-              <Routes>
+    <ErrorBoundary>
+      <AuthProvider>
+        <Router>
+          <div className="App">
+            <Routes>
               <Route
                 path="/"
                 element={
@@ -78,12 +75,11 @@ function App() {
                   </Layout>
                 }
               />
-              </Routes>
-            </div>
-          </Router>
-        </AuthProvider>
-      </ErrorBoundary>
-    </div>
+            </Routes>
+          </div>
+        </Router>
+      </AuthProvider>
+    </ErrorBoundary>
   );
 }
 
