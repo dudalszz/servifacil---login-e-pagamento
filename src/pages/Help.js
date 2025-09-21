@@ -1,41 +1,52 @@
 import React, { useMemo, useState } from "react";
+import "./Help.css";
+import { useEnterNavigation } from "../hooks/useEnterNavigation";
 
 const ALL_FAQ = [
   {
-    q: "Como enviar uma proposta?",
-    a: "Acesse o projeto, clique em Enviar Proposta e preencha os campos.",
+    q: "Como enviar uma proposta para um projeto?",
+    a: "Para enviar uma proposta: 1) Acesse a página do projeto desejado, 2) Clique no botão 'Enviar Proposta', 3) Preencha sua proposta com valor, prazo e descrição detalhada, 4) Anexe portfólio se necessário, 5) Clique em 'Enviar'. Você receberá uma confirmação por email.",
   },
   {
-    q: "Como cancelar um contrato?",
-    a: "Verifique prazos no contrato e solicite cancelamento na aba Projetos.",
+    q: "Como cancelar um contrato em andamento?",
+    a: "Para cancelar um contrato: 1) Acesse 'Meus Projetos', 2) Selecione o projeto ativo, 3) Clique em 'Solicitar Cancelamento', 4) Informe o motivo, 5) Aguarde aprovação do cliente. Atenção: verifique as cláusulas de cancelamento no contrato antes de prosseguir.",
   },
   {
-    q: "Como funciona a disputa de pagamento?",
-    a: "Abra disputa em Pagamentos > Disputas. Análise em até 7 dias.",
+    q: "Como funciona o sistema de disputas de pagamento?",
+    a: "Se houver problemas com pagamento: 1) Vá em 'Pagamentos' > 'Disputas', 2) Clique em 'Abrir Disputa', 3) Forneça evidências (conversas, entregas, etc.), 4) Nossa equipe analisará em até 7 dias úteis, 5) Você receberá a decisão por email. Mantenha sempre registros das comunicações.",
   },
   {
-    q: "Como solicitar suporte financeiro?",
-    a: "Envie documentos na central financeira e abra um ticket.",
+    q: "Como solicitar suporte financeiro ou adiantamento?",
+    a: "Para solicitar suporte financeiro: 1) Acesse 'Central Financeira', 2) Clique em 'Solicitar Adiantamento', 3) Envie comprovantes de renda e projetos em andamento, 4) Abra um ticket de suporte, 5) Aguarde análise (até 3 dias úteis). Disponível apenas para usuários com histórico positivo.",
   },
   {
-    q: "Como alterar método de saque?",
-    a: "Em Configurações > Financeiro, escolha o método e confirme.",
+    q: "Como alterar meu método de saque preferido?",
+    a: "Para alterar método de saque: 1) Vá em 'Configurações' > 'Financeiro', 2) Selecione 'Métodos de Saque', 3) Escolha entre PIX, transferência bancária ou carteira digital, 4) Preencha os dados necessários, 5) Confirme com sua senha. As alterações são aplicadas no próximo saque.",
   },
   {
-    q: "Como editar meu perfil?",
-    a: "Vá em Perfil > Editar e atualize seus dados.",
+    q: "Como editar informações do meu perfil?",
+    a: "Para editar seu perfil: 1) Clique em 'Perfil' no menu, 2) Selecione 'Editar Perfil', 3) Atualize suas informações pessoais, habilidades e portfólio, 4) Adicione uma foto profissional, 5) Clique em 'Salvar Alterações'. Um perfil completo aumenta suas chances de conseguir projetos.",
   },
   {
-    q: "Como redefinir senha?",
-    a: "Use Esqueci minha senha na tela de login.",
+    q: "Como redefinir minha senha de acesso?",
+    a: "Para redefinir sua senha: 1) Na tela de login, clique em 'Esqueci minha senha', 2) Digite seu email cadastrado, 3) Verifique sua caixa de entrada (e spam), 4) Clique no link recebido, 5) Crie uma nova senha segura. O link expira em 24 horas.",
   },
   {
-    q: "Como ativar notificações?",
-    a: "Em Notificações, selecione categorias, canais e frequência.",
+    q: "Como configurar minhas notificações?",
+    a: "Para configurar notificações: 1) Acesse 'Configurações' > 'Notificações', 2) Escolha quais tipos de notificação deseja receber (propostas, mensagens, pagamentos), 3) Selecione os canais (email, SMS, push), 4) Defina a frequência (imediata, diária, semanal), 5) Salve as configurações.",
+  },
+  {
+    q: "Qual é a taxa cobrada pela plataforma?",
+    a: "Nossa taxa de serviço é de 10% sobre o valor total do projeto, descontada automaticamente quando o pagamento é liberado. Esta taxa cobre: proteção contra fraudes, suporte ao cliente, sistema de disputas, e manutenção da plataforma. Não há taxas de cadastro ou mensalidades.",
+  },
+  {
+    q: "Como funciona o sistema de avaliações?",
+    a: "Após cada projeto: 1) Cliente e freelancer se avaliam mutuamente, 2) Notas de 1 a 5 estrelas, 3) Comentários opcionais, 4) Avaliações aparecem no perfil, 5) Média geral é calculada automaticamente. Avaliações honestas ajudam a manter a qualidade da plataforma.",
   },
 ];
 
 const Help = () => {
+  const handleKeyPress = useEnterNavigation();
   const [query, setQuery] = useState("");
   const [openIdx, setOpenIdx] = useState(-1);
   const [ticket, setTicket] = useState({
@@ -62,11 +73,17 @@ const Help = () => {
   const handleSubmitTicket = (e) => {
     e.preventDefault();
     const ticketNumber = Math.floor(1000 + Math.random() * 9000);
+    const priorityText = {
+      low: "baixa prioridade",
+      normal: "prioridade normal", 
+      high: "alta prioridade",
+      urgent: "prioridade urgente"
+    };
     setToast(
-      `Seu ticket #${ticketNumber} foi criado. Responderemos em até 48h úteis.`
+      `✅ Chamado #${ticketNumber} criado com sucesso! Prioridade: ${priorityText[ticket.priority]}. Nossa equipe responderá em até 48h úteis.`
     );
     setTicket({ subject: "", description: "", priority: "normal", file: null });
-    setTimeout(() => setToast(""), 4000);
+    setTimeout(() => setToast(""), 6000);
   };
 
   return (
@@ -83,7 +100,7 @@ const Help = () => {
 
         {/* FAQ Section */}
         <div className="section-card help-faq">
-          <h2>Perguntas Frequentes</h2>
+          <h2><i className="fas fa-question-circle"></i> Perguntas Frequentes</h2>
           <div className="help-search">
             <input
               type="text"
@@ -125,27 +142,30 @@ const Help = () => {
 
         {/* Support Ticket Section */}
         <div className="section-card help-ticket">
-          <h2>Abrir chamado</h2>
+          <h2><i className="fas fa-headset"></i> Abrir Chamado de Suporte</h2>
           <form onSubmit={handleSubmitTicket} className="help-form">
             <div className="form-group">
               <input
                 type="text"
-                placeholder="Assunto"
+                placeholder="Assunto do chamado"
                 value={ticket.subject}
                 onChange={(e) =>
                   setTicket((p) => ({ ...p, subject: e.target.value }))
                 }
+                onKeyPress={handleKeyPress}
                 required
               />
             </div>
             <div className="form-group">
               <textarea
-                placeholder="Descreva o problema"
+                placeholder="Descreva detalhadamente o problema ou dúvida"
                 value={ticket.description}
                 onChange={(e) =>
-                  setTicket((p) => ({ ...p, description: e.target.value }))
+                  setTicket((p) => ({ ...p, description: e.target.value.slice(0, 500) }))
                 }
+                onKeyPress={handleKeyPress}
                 rows={4}
+                maxLength={500}
                 required
               />
             </div>
@@ -170,16 +190,22 @@ const Help = () => {
                   onChange={(e) =>
                     setTicket((p) => ({ ...p, priority: e.target.value }))
                   }
+                  onKeyPress={handleKeyPress}
                 >
-                  <option value="low">Baixa</option>
-                  <option value="normal">Normal</option>
-                  <option value="high">Alta</option>
+                  <option value="low">🟢 Baixa</option>
+                  <option value="normal">🟡 Normal</option>
+                  <option value="high">🔴 Alta</option>
+                  <option value="urgent">⚡ Urgente</option>
                 </select>
               </label>
             </div>
             <div className="form-actions">
-              <button className="save-btn" type="submit">
-                Enviar
+              <div className="char-counter">
+                {ticket.description.length}/500 caracteres
+              </div>
+              <button className="save-btn" type="submit" disabled={!ticket.subject.trim() || !ticket.description.trim()}>
+                <i className="fas fa-paper-plane"></i>
+                Enviar Chamado
               </button>
             </div>
           </form>
@@ -194,18 +220,18 @@ const Help = () => {
         <div className="section-card help-tutorials">
           <h2>Tutoriais rápidos</h2>
           <div className="tutorial-grid">
-            <button className="tutorial-card" onClick={() => alert('Tutorial em desenvolvimento')}>
+            <a href="#" className="tutorial-card" onClick={(e) => { e.preventDefault(); alert('Tutorial em desenvolvimento'); }}>
               <i className="fas fa-paper-plane"></i>
               <span>Como enviar proposta</span>
-            </button>
-            <button className="tutorial-card" onClick={() => alert('Tutorial em desenvolvimento')}>
+            </a>
+            <a href="#" className="tutorial-card" onClick={(e) => { e.preventDefault(); alert('Tutorial em desenvolvimento'); }}>
               <i className="fas fa-file-invoice"></i>
               <span>Como emitir nota fiscal</span>
-            </button>
-            <button className="tutorial-card" onClick={() => alert('Tutorial em desenvolvimento')}>
+            </a>
+            <a href="#" className="tutorial-card" onClick={(e) => { e.preventDefault(); alert('Tutorial em desenvolvimento'); }}>
               <i className="fas fa-money-bill-wave"></i>
               <span>Como solicitar saque</span>
-            </button>
+            </a>
           </div>
         </div>
 

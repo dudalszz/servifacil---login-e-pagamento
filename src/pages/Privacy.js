@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 
 const defaultState = {
   visibility: "public", // public | clients | private
+  onlineStatus: "online", // online | busy | offline
   online: true,
   blockedSearch: "",
   blocked: ["maria.silva", "joao.souza"],
@@ -57,289 +58,398 @@ const Privacy = () => {
     <div className="editar-perfil" style={{ width: "100%", maxWidth: 900 }}>
       <div className="header-editar" style={{ width: "100%", gap: 12 }}>
         <h1>Privacidade</h1>
+        <div className="security-info">
+          <i className="fas fa-shield-alt"></i>
+          <span>Seus dados estão protegidos e criptografados. Controle quem vê seu perfil e como seus dados são usados.</span>
+        </div>
+      </div>
+
+      <div className="section-card privacy-section">
+        <h2>Visibilidade do Perfil</h2>
         <div
-          className="security-info"
-          style={{ justifyContent: "space-between" }}
+          className="visibility-group"
+          style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}
         >
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <i className="fas fa-shield-alt"></i>
-            <span>
-              Controle quem vê seu perfil e como seus dados são usados.
-            </span>
-          </div>
-        </div>
-
-        <div className="section-card privacy-section">
-          <h2>Visibilidade do Perfil</h2>
-          <div
-            className="visibility-group"
-            style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}
-          >
-            <label title="Público: qualquer pessoa pode ver seu portfólio e avaliações.">
-              <input
-                type="radio"
-                name="visibility"
-                value="public"
-                checked={state.visibility === "public"}
-                onChange={(e) =>
-                  setState((p) => ({ ...p, visibility: e.target.value }))
-                }
-              />
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                }}
-              >
-                <span style={{ fontWeight: "600" }}>Público</span>
-                <small style={{ color: "#6b7280", fontSize: "0.8rem" }}>
-                  Qualquer pessoa pode ver seu perfil
-                </small>
-              </div>
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="visibility"
-                value="clients"
-                checked={state.visibility === "clients"}
-                onChange={(e) =>
-                  setState((p) => ({ ...p, visibility: e.target.value }))
-                }
-              />
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                }}
-              >
-                <span style={{ fontWeight: "600" }}>Somente clientes</span>
-                <small style={{ color: "#6b7280", fontSize: "0.8rem" }}>
-                  Apenas clientes ativos podem ver
-                </small>
-              </div>
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="visibility"
-                value="private"
-                checked={state.visibility === "private"}
-                onChange={(e) =>
-                  setState((p) => ({ ...p, visibility: e.target.value }))
-                }
-              />
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "flex-start",
-                }}
-              >
-                <span style={{ fontWeight: "600" }}>Privado</span>
-                <small style={{ color: "#6b7280", fontSize: "0.8rem" }}>
-                  Perfil completamente privado
-                </small>
-              </div>
-            </label>
-          </div>
-          <div
-            className="warning"
-            style={{
-              textAlign: "left",
-              marginTop: "1rem",
-              padding: "0.75rem 1rem",
-              background: "#fef3c7",
-              border: "1px solid #f59e0b",
-              borderRadius: "8px",
-              color: "#92400e",
-            }}
-          >
-            <i
-              className="fas fa-info-circle"
-              style={{ marginRight: "0.5rem" }}
-            ></i>
-            <strong>Dica:</strong> Perfis públicos recebem mais propostas de
-            trabalho.
-          </div>
-        </div>
-
-        <div className="section-card privacy-section">
-          <h2>Status Online</h2>
-          <div
-            className="info-block"
-            style={{
-              justifyContent: "space-between",
-              alignItems: "center",
-              padding: "1rem",
-              background: "#f9fafb",
-              borderRadius: "8px",
-            }}
-          >
-            <div
-              style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
-            >
-              <i
-                className="fas fa-circle"
-                style={{
-                  color: state.online ? "#10b981" : "#6b7280",
-                  fontSize: "0.8rem",
-                }}
-              ></i>
-              <span>Mostrar "Disponível"</span>
-            </div>
-            <label className="switch">
-              <input
-                type="checkbox"
-                aria-label="Exibir status online Disponível"
-                checked={state.online}
-                onChange={() => setState((p) => ({ ...p, online: !p.online }))}
-              />
-              <span className="slider"></span>
-            </label>
-          </div>
-        </div>
-
-        <div className="section-card privacy-section">
-          <h2>Controle de Dados</h2>
-          <div
-            className="button-group data-control"
-            style={{ justifyContent: "flex-start", gap: 12 }}
-          >
-            <button className="save-btn" onClick={handleDownloadData}>
-              <i
-                className="fas fa-download"
-                style={{ marginRight: "0.5rem" }}
-              ></i>
-              Baixar meus dados
-            </button>
-            <button
-              className="cancel-btn"
-              onClick={() => setShowDeleteModal(true)}
-            >
-              <i className="fas fa-trash" style={{ marginRight: "0.5rem" }}></i>
-              Excluir conta
-            </button>
-          </div>
-        </div>
-
-        <div className="section-card privacy-section">
-          <h2>Bloqueio e Denúncia</h2>
-          <div
-            className="info-block"
-            style={{ gap: 12, flexWrap: "wrap", marginBottom: "1rem" }}
-          >
+          <label title="Público: qualquer pessoa pode ver seu portfólio e avaliações.">
             <input
-              type="text"
-              placeholder="Buscar usuário para bloquear"
-              value={state.blockedSearch}
+              type="radio"
+              name="visibility"
+              value="public"
+              checked={state.visibility === "public"}
               onChange={(e) =>
-                setState((p) => ({ ...p, blockedSearch: e.target.value }))
+                setState((p) => ({ ...p, visibility: e.target.value }))
               }
-              style={{ flex: 1, minWidth: "200px" }}
             />
-          </div>
-          <div
-            className="blocked-list"
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
+              <span style={{ fontWeight: "600" }}>Público</span>
+              <small style={{ color: "#6b7280", fontSize: "0.8rem" }}>
+                Qualquer pessoa pode ver seu perfil
+              </small>
+            </div>
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="visibility"
+              value="clients"
+              checked={state.visibility === "clients"}
+              onChange={(e) =>
+                setState((p) => ({ ...p, visibility: e.target.value }))
+              }
+            />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
+              <span style={{ fontWeight: "600" }}>Somente clientes</span>
+              <small style={{ color: "#6b7280", fontSize: "0.8rem" }}>
+                Apenas clientes ativos podem ver
+              </small>
+            </div>
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="visibility"
+              value="private"
+              checked={state.visibility === "private"}
+              onChange={(e) =>
+                setState((p) => ({ ...p, visibility: e.target.value }))
+              }
+            />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
+              <span style={{ fontWeight: "600" }}>Privado</span>
+              <small style={{ color: "#6b7280", fontSize: "0.8rem" }}>
+                Perfil completamente privado
+              </small>
+            </div>
+          </label>
+        </div>
+        <div
+          className="warning"
+          style={{
+            textAlign: "left",
+            marginTop: "1rem",
+            padding: "0.75rem 1rem",
+            background: "#fef3c7",
+            border: "1px solid #f59e0b",
+            borderRadius: "8px",
+            color: "#92400e",
+          }}
+        >
+          <i
+            className="fas fa-info-circle"
+            style={{ marginRight: "0.5rem" }}
+          ></i>
+          <strong>Dica:</strong> Perfis públicos recebem mais propostas de
+          trabalho.
+        </div>
+      </div>
+
+      <div className="section-card privacy-section">
+        <h2>Status Online</h2>
+        <div
+          className="visibility-group"
+          style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}
+        >
+          <label title="Online: aparece como disponível para novos projetos.">
+            <input
+              type="radio"
+              name="onlineStatus"
+              value="online"
+              checked={state.onlineStatus === "online"}
+              onChange={(e) =>
+                setState((p) => ({ ...p, onlineStatus: e.target.value }))
+              }
+            />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
+              <span style={{ fontWeight: "600" }}>Online</span>
+              <small style={{ color: "#6b7280", fontSize: "0.8rem" }}>
+                Disponível para novos projetos
+              </small>
+            </div>
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="onlineStatus"
+              value="busy"
+              checked={state.onlineStatus === "busy"}
+              onChange={(e) =>
+                setState((p) => ({ ...p, onlineStatus: e.target.value }))
+              }
+            />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
+              <span style={{ fontWeight: "600" }}>Ocupado</span>
+              <small style={{ color: "#6b7280", fontSize: "0.8rem" }}>
+                Trabalhando em projetos atuais
+              </small>
+            </div>
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="onlineStatus"
+              value="offline"
+              checked={state.onlineStatus === "offline"}
+              onChange={(e) =>
+                setState((p) => ({ ...p, onlineStatus: e.target.value }))
+              }
+            />
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
+              <span style={{ fontWeight: "600" }}>Offline</span>
+              <small style={{ color: "#6b7280", fontSize: "0.8rem" }}>
+                Não disponível para novos projetos
+              </small>
+            </div>
+          </label>
+        </div>
+        <div
+          className="warning"
+          style={{
+            textAlign: "left",
+            marginTop: "1rem",
+            padding: "0.75rem 1rem",
+            background: "#fef3c7",
+            border: "1px solid #f59e0b",
+            borderRadius: "8px",
+            color: "#92400e",
+          }}
+        >
+          <i
+            className="fas fa-info-circle"
+            style={{ marginRight: "0.5rem" }}
+          ></i>
+          <strong>Dica:</strong> Status online ajuda clientes a saber quando você está disponível.
+        </div>
+      </div>
+
+      <div className="section-card privacy-section">
+        <h2>Usuários Bloqueados</h2>
+        <div style={{ marginBottom: "1rem" }}>
+          <input
+            type="text"
+            placeholder="Buscar usuário bloqueado..."
+            value={state.blockedSearch}
+            onChange={(e) =>
+              setState((p) => ({ ...p, blockedSearch: e.target.value }))
+            }
             style={{
-              flexDirection: "column",
-              alignItems: "stretch",
-              gap: 8,
-              maxHeight: "200px",
-              overflowY: "auto",
-              padding: "0.5rem",
-              background: "#f9fafb",
+              width: "100%",
+              padding: "0.75rem",
+              border: "1px solid #d1d5db",
               borderRadius: "8px",
-              border: "1px solid #e5e7eb",
+              fontSize: "0.9rem",
             }}
-          >
-            {filteredBlocked.length === 0 && (
+          />
+        </div>
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+          {filteredBlocked.length === 0 ? (
+            <div
+              style={{
+                textAlign: "center",
+                color: "#6b7280",
+                padding: "2rem",
+                fontStyle: "italic",
+              }}
+            >
+              {state.blockedSearch.trim()
+                ? "Nenhum usuário encontrado"
+                : "Nenhum usuário bloqueado"}
+            </div>
+          ) : (
+            filteredBlocked.map((username) => (
               <div
-                style={{
-                  color: "#6b7280",
-                  textAlign: "center",
-                  padding: "1rem",
-                  fontStyle: "italic",
-                }}
-              >
-                <i
-                  className="fas fa-user-slash"
-                  style={{ marginRight: "0.5rem" }}
-                ></i>
-                Nenhum usuário bloqueado
-              </div>
-            )}
-            {filteredBlocked.map((user) => (
-              <div
-                key={user}
+                key={username}
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
-                  padding: "0.75rem",
-                  background: "#fff",
-                  borderRadius: "6px",
+                  padding: "0.75rem 1rem",
+                  background: "#f9fafb",
+                  borderRadius: "8px",
                   border: "1px solid #e5e7eb",
                 }}
               >
-                <span style={{ fontWeight: "500" }}>@{user}</span>
+                <span style={{ fontWeight: "500" }}>@{username}</span>
                 <button
-                  className="cancel-btn"
-                  onClick={() => handleUnblock(user)}
-                  style={{ padding: "0.4rem 0.8rem", fontSize: "0.85rem" }}
+                  onClick={() => handleUnblock(username)}
+                  style={{
+                    padding: "0.25rem 0.75rem",
+                    background: "#ef4444",
+                    color: "white",
+                    border: "none",
+                    borderRadius: "6px",
+                    fontSize: "0.8rem",
+                    cursor: "pointer",
+                  }}
                 >
-                  <i
-                    className="fas fa-unlock"
-                    style={{ marginRight: "0.3rem" }}
-                  ></i>
                   Desbloquear
                 </button>
               </div>
-            ))}
-          </div>
+            ))
+          )}
         </div>
+      </div>
 
-        {showDeleteModal && (
+      <div className="section-card privacy-section">
+        <h2>Exportar Dados</h2>
+        <p style={{ marginBottom: "1rem", color: "#6b7280" }}>
+          Baixe uma cópia de todas as suas configurações de privacidade.
+        </p>
+        <button
+          onClick={handleDownloadData}
+          style={{
+            padding: "0.75rem 1.5rem",
+            background: "#10b981",
+            color: "white",
+            border: "none",
+            borderRadius: "8px",
+            cursor: "pointer",
+            fontWeight: "500",
+          }}
+        >
+          <i className="fas fa-download" style={{ marginRight: "0.5rem" }}></i>
+          Exportar dados
+        </button>
+      </div>
+
+      <div className="section-card privacy-section">
+        <h2 style={{ color: "#dc2626" }}>Zona de Perigo</h2>
+        <p style={{ marginBottom: "1rem", color: "#6b7280" }}>
+          Ações irreversíveis que afetam permanentemente sua conta.
+        </p>
+        <button
+          onClick={() => setShowDeleteModal(true)}
+          style={{
+            padding: "0.75rem 1.5rem",
+            background: "#dc2626",
+            color: "white",
+            border: "none",
+            borderRadius: "8px",
+            cursor: "pointer",
+            fontWeight: "500",
+          }}
+        >
+          <i className="fas fa-trash" style={{ marginRight: "0.5rem" }}></i>
+          Excluir conta
+        </button>
+      </div>
+
+      {showDeleteModal && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: "rgba(0,0,0,0.5)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 1000,
+          }}
+        >
           <div
-            role="dialog"
-            aria-modal="true"
-            className="section-card"
-            style={{ border: "2px solid #ef4444" }}
+            style={{
+              background: "white",
+              padding: "2rem",
+              borderRadius: "12px",
+              maxWidth: "400px",
+              width: "90%",
+            }}
           >
-            <h2>Confirmar exclusão da conta</h2>
-            <ul style={{ marginLeft: 16, color: "#374151" }}>
-              <li>Seus dados e histórico serão removidos permanentemente.</li>
-              <li>Seus anúncios e propostas serão encerrados.</li>
-              <li>Esta ação não pode ser desfeita.</li>
-            </ul>
-            <div className="info-block" style={{ marginTop: 12 }}>
-              <input
-                type="text"
-                placeholder="Digite seu nome para confirmar"
-                aria-label="Digite seu nome para confirmar exclusão"
-                value={confirmName}
-                onChange={(e) => setConfirmName(e.target.value)}
-              />
-            </div>
-            <div
-              className="button-group"
-              style={{ justifyContent: "flex-end" }}
-            >
+            <h3 style={{ marginBottom: "1rem", color: "#dc2626" }}>
+              Confirmar exclusão
+            </h3>
+            <p style={{ marginBottom: "1rem", color: "#6b7280" }}>
+              Esta ação não pode ser desfeita. Digite "CONFIRMAR" para
+              prosseguir:
+            </p>
+            <input
+              type="text"
+              value={confirmName}
+              onChange={(e) => setConfirmName(e.target.value)}
+              placeholder="Digite CONFIRMAR"
+              style={{
+                width: "100%",
+                padding: "0.75rem",
+                border: "1px solid #d1d5db",
+                borderRadius: "8px",
+                marginBottom: "1rem",
+              }}
+            />
+            <div style={{ display: "flex", gap: "0.5rem" }}>
               <button
-                className="cancel-btn"
-                onClick={() => setShowDeleteModal(false)}
+                onClick={() => {
+                  setShowDeleteModal(false);
+                  setConfirmName("");
+                }}
+                style={{
+                  flex: 1,
+                  padding: "0.75rem",
+                  background: "#6b7280",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "8px",
+                  cursor: "pointer",
+                }}
               >
                 Cancelar
               </button>
-              <button className="logout-btn" disabled={!canConfirmDelete}>
-                Excluir conta
+              <button
+                onClick={() => alert("Funcionalidade em desenvolvimento")}
+                disabled={!canConfirmDelete}
+                style={{
+                  flex: 1,
+                  padding: "0.75rem",
+                  background: canConfirmDelete ? "#dc2626" : "#d1d5db",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "8px",
+                  cursor: canConfirmDelete ? "pointer" : "not-allowed",
+                }}
+              >
+                Excluir
               </button>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

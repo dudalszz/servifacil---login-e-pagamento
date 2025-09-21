@@ -59,23 +59,9 @@ const Notifications = () => {
     <div className="editar-perfil" style={{ width: "100%", maxWidth: 900 }}>
       <div className="header-editar" style={{ width: "100%", gap: 12 }}>
         <h1>Notificações</h1>
-        <div
-          className="security-info"
-          style={{ justifyContent: "space-between" }}
-        >
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-            <i className="fas fa-bell"></i>
-            <span>Escolha como e quando receber alertas.</span>
-          </div>
-          <div className="button-group" style={{ marginTop: 5 }}>
-            <button
-              className="cancel-btn"
-              onClick={() => setSettings(initialState)}
-              aria-label="Restaurar preferências padrão"
-            >
-              Restaurar padrão
-            </button>
-          </div>
+        <div className="security-info">
+          <i className="fas fa-bell"></i>
+          <span>Escolha como e quando receber alertas.</span>
         </div>
 
         <div className="section-card">
@@ -316,6 +302,16 @@ const Notifications = () => {
             Ativar notificações de mensagens permite responder clientes
             rapidamente.
           </div>
+        </div>
+
+        <div className="button-group" style={{ marginTop: "1rem", justifyContent: "center" }}>
+          <button
+            className="cancel-btn"
+            onClick={() => setSettings(initialState)}
+            aria-label="Restaurar preferências padrão"
+          >
+            Restaurar padrão
+          </button>
         </div>
       </div>
     </div>

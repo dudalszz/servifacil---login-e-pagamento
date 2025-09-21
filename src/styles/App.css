@@ -213,6 +213,47 @@ button:focus {
   outline-offset: 2px;
 }
 
+/* ---------- RADIO BUTTON STYLES ---------- */
+input[type="radio"] {
+  outline: none !important;
+}
+
+input[type="radio"]:focus {
+  outline: none !important;
+}
+
+/* ---------- WARNING/DICA STYLES ---------- */
+.warning {
+  background: #fef3c7 !important;
+  border: 1px solid #f59e0b !important;
+  color: #92400e !important;
+  padding: 0.75rem 1rem !important;
+  border-radius: 8px !important;
+  margin-top: 1rem !important;
+}
+
+/* ---------- SECURITY INFO GLOBAL STYLES (IGUAL AO HELP) ---------- */
+.editar-perfil .security-info,
+.security-info {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.75rem !important;
+  padding: 1rem 1.5rem !important;
+  background: rgba(16, 185, 129, 0.1) !important;
+  border: 1px solid rgba(16, 185, 129, 0.2) !important;
+  border-radius: 12px !important;
+  color: #065f46 !important;
+  font-weight: 500 !important;
+  margin-bottom: 1rem !important;
+}
+
+.editar-perfil .security-info i,
+.security-info i {
+  font-size: 1.25rem !important;
+  color: #10b981 !important;
+}
+
 .profile-info input,
 .info-box input,
 .info-box select {
