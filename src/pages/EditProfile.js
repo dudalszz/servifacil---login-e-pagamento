@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useEnterNavigation } from "../hooks/useEnterNavigation";
 
 const EditProfile = () => {
   const navigate = useNavigate();
+  const handleKeyPress = useEnterNavigation();
   const [formData, setFormData] = useState({
     nome: "",
     telefone: "",
@@ -23,9 +25,18 @@ const EditProfile = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Limpa localStorage existente ao montar o componente
+    // Carregar dados do perfil se existirem
     try {
-      localStorage.removeItem("profile_form");
+      const profileData = localStorage.getItem("profile_data");
+      if (profileData) {
+        const parsed = JSON.parse(profileData);
+        setFormData(prev => ({
+          ...prev,
+          nome: parsed.name || "",
+          telefone: parsed.phone || "",
+          rua: parsed.address || ""
+        }));
+      }
     } catch (_) {}
   }, []);
 
@@ -100,6 +111,7 @@ const EditProfile = () => {
       [name]: v,
     }));
   };
+
 
   const validateForm = () => {
     const errs = {};
@@ -299,6 +311,7 @@ const EditProfile = () => {
                 placeholder="Nome completo"
                 value={formData.nome}
                 onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
                 className={errors.nome ? "error" : ""}
               />
               {errors.nome && <span className="error-message">{errors.nome}</span>}
@@ -312,7 +325,10 @@ const EditProfile = () => {
                 placeholder="Telefone"
                 value={formData.telefone}
                 onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
+                className={errors.telefone ? "error" : ""}
               />
+              {errors.telefone && <span className="error-message">{errors.telefone}</span>}
             </div>
             <div className="info-block">
               <i className="fas fa-id-card"></i>
@@ -323,7 +339,10 @@ const EditProfile = () => {
                 placeholder="CPF"
                 value={formData.cpf}
                 onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
+                className={errors.cpf ? "error" : ""}
               />
+              {errors.cpf && <span className="error-message">{errors.cpf}</span>}
             </div>
             <div className="info-block">
               <i className="fas fa-user-tag"></i>
@@ -334,7 +353,10 @@ const EditProfile = () => {
                 placeholder="Nome de usuário"
                 value={formData.usuario}
                 onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
+                className={errors.usuario ? "error" : ""}
               />
+              {errors.usuario && <span className="error-message">{errors.usuario}</span>}
             </div>
             <div className="info-block">
               <i className="fas fa-envelope"></i>
@@ -345,6 +367,7 @@ const EditProfile = () => {
                 placeholder="Email"
                 value={formData.email}
                 onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
               />
             </div>
           </div>
@@ -360,6 +383,7 @@ const EditProfile = () => {
                 placeholder="Rua"
                 value={formData.rua}
                 onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
               />
             </div>
             <div className="info-block">
@@ -371,6 +395,7 @@ const EditProfile = () => {
                 placeholder="Número"
                 value={formData.numero}
                 onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
               />
             </div>
             <div className="info-block">
@@ -382,6 +407,7 @@ const EditProfile = () => {
                 placeholder="Bairro"
                 value={formData.bairro}
                 onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
               />
             </div>
             <div className="info-block">
@@ -393,6 +419,7 @@ const EditProfile = () => {
                 placeholder="Cidade"
                 value={formData.cidade}
                 onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
               />
             </div>
             <div className="info-block">
@@ -402,6 +429,7 @@ const EditProfile = () => {
                 name="estado"
                 value={formData.estado}
                 onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
               >
                 <option value="">Selecione o estado</option>
                 <option value="AC">AC - Acre</option>
@@ -442,6 +470,7 @@ const EditProfile = () => {
                 placeholder="CEP"
                 value={formData.cep}
                 onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
               />
             </div>
           </div>
@@ -457,6 +486,7 @@ const EditProfile = () => {
                 placeholder="Digite nova senha"
                 value={formData.senha}
                 onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
               />
             </div>
             <div className="info-block">
@@ -468,6 +498,7 @@ const EditProfile = () => {
                 placeholder="Confirme nova senha"
                 value={formData.confirmar}
                 onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
               />
             </div>
             <div className="warning">

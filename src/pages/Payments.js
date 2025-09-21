@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./Payments.css";
 import { ButtonLoading } from "../components/Loading";
+import { useEnterNavigation } from "../hooks/useEnterNavigation";
 
 const Payments = () => {
+  const handleKeyPress = useEnterNavigation();
   const [paymentData, setPaymentData] = useState(() => {
     const defaults = {
       cardNumber: "",
@@ -94,6 +96,7 @@ const Payments = () => {
       [name]: v,
     }));
   };
+
 
   const validateForm = () => {
     const errs = {};
@@ -230,6 +233,7 @@ const Payments = () => {
                 name="cardNumber"
                 value={paymentData.cardNumber}
                 onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
                 className={errors.cardNumber ? "error" : ""}
                 maxLength={19}
                 autoComplete="cc-number"
@@ -248,6 +252,7 @@ const Payments = () => {
                   name="expiryDate"
                   value={paymentData.expiryDate}
                   onChange={handleInputChange}
+                  onKeyPress={handleKeyPress}
                   className={errors.expiryDate ? "error" : ""}
                   maxLength={5}
                   autoComplete="cc-exp"
@@ -264,6 +269,7 @@ const Payments = () => {
                   name="cvv"
                   value={paymentData.cvv}
                   onChange={handleInputChange}
+                  onKeyPress={handleKeyPress}
                   className={errors.cvv ? "error" : ""}
                   maxLength={4}
                   autoComplete="cc-csc"
@@ -282,6 +288,7 @@ const Payments = () => {
                 name="cardName"
                 value={paymentData.cardName}
                 onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
                 className={errors.cardName ? "error" : ""}
                 autoComplete="cc-name"
               />
@@ -301,6 +308,7 @@ const Payments = () => {
                 name="address"
                 value={paymentData.address}
                 onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
                 className={errors.address ? "error" : ""}
               />
               {errors.address && (
@@ -316,6 +324,7 @@ const Payments = () => {
                   name="city"
                   value={paymentData.city}
                   onChange={handleInputChange}
+                  onKeyPress={handleKeyPress}
                   className={errors.city ? "error" : ""}
                 />
                 {errors.city && (
@@ -328,6 +337,7 @@ const Payments = () => {
                   name="state"
                   value={paymentData.state}
                   onChange={handleInputChange}
+                  onKeyPress={handleKeyPress}
                   className={errors.state ? "error" : ""}
                 >
                   <option value="">Selecione</option>
@@ -349,6 +359,7 @@ const Payments = () => {
                 name="cep"
                 value={paymentData.cep}
                 onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
                 className={errors.cep ? "error" : ""}
                 maxLength={9}
               />

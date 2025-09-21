@@ -194,18 +194,18 @@ const Help = () => {
         <div className="section-card help-tutorials">
           <h2>Tutoriais rápidos</h2>
           <div className="tutorial-grid">
-            <a href="#" className="tutorial-card">
+            <button className="tutorial-card" onClick={() => alert('Tutorial em desenvolvimento')}>
               <i className="fas fa-paper-plane"></i>
               <span>Como enviar proposta</span>
-            </a>
-            <a href="#" className="tutorial-card">
+            </button>
+            <button className="tutorial-card" onClick={() => alert('Tutorial em desenvolvimento')}>
               <i className="fas fa-file-invoice"></i>
               <span>Como emitir nota fiscal</span>
-            </a>
-            <a href="#" className="tutorial-card">
+            </button>
+            <button className="tutorial-card" onClick={() => alert('Tutorial em desenvolvimento')}>
               <i className="fas fa-money-bill-wave"></i>
               <span>Como solicitar saque</span>
-            </a>
+            </button>
           </div>
         </div>
 
@@ -218,10 +218,10 @@ const Help = () => {
             <div className="community-text">
               <h3>Comunidade</h3>
               <p>Conecte-se com outros freelancers e tire suas dúvidas</p>
-              <a href="#" className="community-btn">
+              <button className="community-btn" onClick={() => alert('Fórum em desenvolvimento')}>
                 Acessar fórum
                 <i className="fas fa-arrow-right"></i>
-              </a>
+              </button>
             </div>
           </div>
         </div>
