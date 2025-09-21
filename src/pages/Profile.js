@@ -4,21 +4,14 @@ import { useNavigate } from "react-router-dom";
 const Profile = () => {
   const navigate = useNavigate();
   const [profile, setProfile] = useState({
-    name: "João Silva",
-    phone: "(11) 99999-9999",
-    address: "São Paulo, SP"
+    name: "",
+    phone: "",
+    address: ""
   });
 
   useEffect(() => {
-    // Carregar dados salvos do localStorage
-    const savedData = localStorage.getItem("profile_data");
-    if (savedData) {
-      try {
-        setProfile(JSON.parse(savedData));
-      } catch (e) {
-        console.log("Erro ao carregar dados do perfil");
-      }
-    }
+    // Removido o carregamento automático dos dados do localStorage
+    // Os campos agora iniciam vazios conforme solicitado pelo usuário
   }, []);
 
   const handleInputChange = (e) => {
@@ -45,7 +38,7 @@ const Profile = () => {
 
     const newProfile = { ...profile, [name]: processedValue };
     setProfile(newProfile);
-    localStorage.setItem("profile_data", JSON.stringify(newProfile));
+    // Removido o salvamento automático no localStorage
   };
 
   const handleKeyPress = (e) => {
@@ -66,11 +59,11 @@ const Profile = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("profile_data");
+    // Removido o localStorage.removeItem pois não há mais dados salvos automaticamente
     setProfile({
-      name: "João Silva",
-      phone: "(11) 99999-9999",
-      address: "São Paulo, SP"
+      name: "",
+      phone: "",
+      address: ""
     });
     alert("Logout realizado com sucesso!");
   };

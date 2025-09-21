@@ -25,19 +25,8 @@ const EditProfile = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    // Carregar dados do perfil se existirem
-    try {
-      const profileData = localStorage.getItem("profile_data");
-      if (profileData) {
-        const parsed = JSON.parse(profileData);
-        setFormData(prev => ({
-          ...prev,
-          nome: parsed.name || "",
-          telefone: parsed.phone || "",
-          rua: parsed.address || ""
-        }));
-      }
-    } catch (_) {}
+    // Removido o carregamento automático dos dados para deixar os campos vazios
+    // Os campos agora iniciam vazios conforme solicitado pelo usuário
   }, []);
 
   useEffect(() => {
