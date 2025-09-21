@@ -1,6 +1,13 @@
-# ServiFácil - Projeto React
+# ServiFácil - Plataforma de Serviços
 
-Este projeto foi migrado de HTML/CSS/JavaScript vanilla para React, mantendo toda a funcionalidade e design originais.
+Plataforma moderna para contratação de serviços domésticos.
+
+## 🚀 Deploy
+Site disponível em: https://dudalszz.github.io/servifacil---login-e-pagamento/
+
+# Getting Started with Create React App
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Funcionalidades Implementadas
 
